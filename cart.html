@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="cart-items"></div>
+    <div id="total"></div>
+    <button onclick="checkout()">Checkout</button>
+  </main>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cart-items');
+    let total = 0;
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.textContent = `${item.name} - $${item.price}`;
+      cartContainer.appendChild(div);
+      total += item.price;
+    });
+    document.getElementById('total').textContent = `Total: $${total}`;
+    function checkout() {
+      alert('Checkout not implemented in simple version.');
+    }
+  </script>
+</body>
+</html>
