@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Details - ShopEasy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Product Details</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <main id="product-detail"></main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productId = parseInt(params.get('id'));
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const product = products.find((p) => p.id === productId);
+    const container = document.getElementById('product-detail');
+
+    if (product) {
+      container.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="detail-image" />
+        <h2>${product.name}</h2>
+        <p class="category">Category: <strong>${product.category}</strong></p>
+        <p class="price">Price: <strong>$${product.price.toFixed(2)}</strong></p>
+        <button onclick="addToCart(${product.id})" class="btn">Add to Cart</button>
+      `;
+    } else {
+      container.textContent = 'Product not found.';
+    }
+
+    function addToCart(id) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const product = products.find((p) => p.id === id);
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Product added to cart!');
+    }
+  </script>
+</body>
+</html>

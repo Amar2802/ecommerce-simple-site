@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple E-Commerce</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopEasy - Your E-Commerce Store</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>ShopEasy</h1>
+    <span id="auth-status"></span>
+    <h1>FashionWorld</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
@@ -16,6 +17,15 @@
   </header>
 
   <main>
+    <div class="search-filter">
+      <input type="text" id="search-input" placeholder="Search products..." />
+      <select id="category-filter">
+        <option value="all">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+      </select>
+    </div>
+
     <h2>Products</h2>
     <div class="product-grid" id="product-list"></div>
   </main>

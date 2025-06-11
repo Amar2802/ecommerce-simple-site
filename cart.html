@@ -1,39 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Cart - ShopEasy</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Your Cart</h1>
     <nav>
       <a href="index.html">Home</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
     </nav>
   </header>
 
   <main>
     <div id="cart-items"></div>
-    <div id="total"></div>
-    <button onclick="checkout()">Checkout</button>
+    <h3 id="total-price"></h3>
   </main>
 
   <script>
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartContainer = document.getElementById('cart-items');
-    let total = 0;
-    cart.forEach(item => {
-      const div = document.createElement('div');
-      div.textContent = `${item.name} - $${item.price}`;
-      cartContainer.appendChild(div);
-      total += item.price;
-    });
-    document.getElementById('total').textContent = `Total: $${total}`;
-    function checkout() {
-      alert('Checkout not implemented in simple version.');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const totalPriceEl = document.getElementById('total-price');
+    const cartCountEl = document.getElementById('cart-count');
+
+    function renderCart() {
+      cartItemsContainer.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsContainer.textContent = 'Your cart is empty.';
+        totalPriceEl.textContent = '';
+        cartCountEl.textContent = '0';
+        return;
+      }
+      let total = 0;
+      cart.forEach((item, idx) => {
+        total += item.price;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <p>Price: $${item.price.toFixed(2)}</p>
+            <button onclick="removeItem(${idx})" class="btn btn-remove">Remove</button>
+          </div>
+        `;
+        cartItemsContainer.appendChild(div);
+      });
+      totalPriceEl.textContent = `Total: $${total.toFixed(2)}`;
+      cartCountEl.textContent = cart.length;
     }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    renderCart();
   </script>
 </body>
 </html>
