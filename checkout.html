@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout - FashionWorld</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">FashionWorld</a>
+    <nav>
+      <a href="index.html">Shop</a>
+      <a href="cart.html">Cart (<span data-cart-count>0</span>)</a>
+      <span id="auth-status"></span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-title">
+      <span class="eyebrow">Secure demo payment</span>
+      <h1>Checkout</h1>
+      <p>Use any realistic test details. This demo creates a local order and does not charge a card.</p>
+    </section>
+
+    <section class="checkout-layout">
+      <form id="checkout-form" class="checkout-form">
+        <fieldset>
+          <legend>Contact</legend>
+          <label>Full name <input name="name" autocomplete="name" required /></label>
+          <label>Email <input type="email" name="email" autocomplete="email" required /></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Shipping</legend>
+          <label>Address <input name="address" autocomplete="street-address" required /></label>
+          <div class="form-row">
+            <label>City <input name="city" autocomplete="address-level2" required /></label>
+            <label>ZIP <input name="zip" autocomplete="postal-code" pattern="[0-9A-Za-z -]{4,10}" required /></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Payment</legend>
+          <div class="payment-options">
+            <label><input type="radio" name="payment" value="card" checked /> Card</label>
+            <label><input type="radio" name="payment" value="upi" /> UPI</label>
+            <label><input type="radio" name="payment" value="cod" /> Cash on delivery</label>
+          </div>
+          <label>Card number <input inputmode="numeric" placeholder="4242 4242 4242 4242" pattern="[0-9 ]{12,19}" /></label>
+          <div class="form-row">
+            <label>Expiry <input placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}" /></label>
+            <label>CVV <input inputmode="numeric" pattern="[0-9]{3,4}" /></label>
+          </div>
+        </fieldset>
+
+        <button class="wide" type="submit">Pay and place order</button>
+      </form>
+
+      <aside class="summary-panel" id="checkout-review" aria-label="Order summary"></aside>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

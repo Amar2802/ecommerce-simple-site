@@ -3,31 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ShopEasy - Your E-Commerce Store</title>
+  <title>FashionWorld - Modern Online Store</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <span id="auth-status"></span>
-    <h1>FashionWorld</h1>
+  <header class="site-header">
+    <a class="brand" href="index.html">FashionWorld</a>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="index.html">Shop</a>
+      <a href="cart.html">Cart (<span data-cart-count>0</span>)</a>
+      <span id="auth-status"></span>
     </nav>
   </header>
 
   <main>
-    <div class="search-filter">
-      <input type="text" id="search-input" placeholder="Search products..." />
-      <select id="category-filter">
-        <option value="all">All Categories</option>
-        <option value="electronics">Electronics</option>
-        <option value="fashion">Fashion</option>
-      </select>
-    </div>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">API-powered catalog</span>
+        <h1>Curated essentials with a checkout flow that actually works.</h1>
+        <p>Browse live products, filter by category, save your cart, and complete a demo payment from one responsive storefront.</p>
+      </div>
+      <div class="hero-stats" aria-label="Store benefits">
+        <strong>Free shipping over $80</strong>
+        <strong>Secure demo checkout</strong>
+        <strong>Saved order history</strong>
+      </div>
+    </section>
 
-    <h2>Products</h2>
-    <div class="product-grid" id="product-list"></div>
+    <section class="toolbar" aria-label="Product filters">
+      <input type="search" id="search-input" placeholder="Search products" />
+      <select id="category-filter" aria-label="Filter by category"></select>
+      <select id="sort-filter" aria-label="Sort products">
+        <option value="name">Sort by name</option>
+        <option value="price-low">Price: low to high</option>
+        <option value="price-high">Price: high to low</option>
+        <option value="rating">Top rated</option>
+      </select>
+    </section>
+
+    <p id="notice" class="notice" hidden></p>
+    <section class="product-grid" id="product-list" aria-live="polite"></section>
   </main>
 
   <script src="script.js"></script>
